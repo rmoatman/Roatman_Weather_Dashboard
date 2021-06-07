@@ -21,3 +21,7 @@ height: 30px;
 .hide {
     display: none;
 }
+
+.forcastcard {
+    border: none;
+}
