@@ -32,26 +32,19 @@ height: 30px;
 }
 
 /* UV Conditions */
-.low { /* 0-2*/
+.bg-low { /* 0-2*/
     background-color: green;
 }
 
-/* UV Conditions */
 .moderate { /* 3-5*/
     background-color: yellow;
 }
 
-/* UV Conditions */
-.high { /* 6-7*/
+.bg-high { /* 6-7*/
     background-color: orange;
 }
 
-/* UV Conditions */
-.veryhigh { /* 8-10*/
-    background-color: red;
-}
 
-/* UV Conditions */
-.extreme { /* 11+*/
+.bg-extreme { /* 11+*/
     background-color: violet;
 }

@@ -82,38 +82,35 @@ var getUserRepos = function (searchlocation) {
 
               if (response.ok) {
                 response.json().then(function (dataUV) {
-                  console.log(dataUV);
+
                   var uvindexnumber = dataUV.current.uvi;
-                  uvindexEl.innerHTML = "Current UV Index: " + uvindexnumber;
+                  uvindexEl.innerHTML = uvindexnumber;
                   
 
-
+                  // Format UV data according to severity //
                     switch (true) {
 
                       case uvindexnumber >= 11:
-                        uvindexEl.classList.add("extreme");
+                        uvindexEl.className = "badge rounded-pill bg-extreme text-dark";
                       break;
 
                       case uvindexnumber >= 8:
-                        uvindexEl.classList.add("veryhigh");
+                        uvindexEl.className = "badge rounded-pill bg-danger text-dark";
                       break;
 
                       case uvindexnumber >= 6:
-                        uvindexEl.classList.add("high");
+                        uvindexEl.className = "badge rounded-pill bg-high text-dark";
                       break;
 
                       case uvindexnumber >= 3:
-                        uvindexEl.classList.add("moderate");
-                      break;
-
-                      case uvindexnumber >= 0:
-                        uvindexEl.classList.add("low");
+                        uvindexEl.className = "badge rounded-pill bg-low text-light";
                       break;
 
                       default:
-                   
+                        uvindexEl.className = "badge rounded-pill bg-success text-dark";
+                      break;
+              
                     }
-
                 });
               } 
             });

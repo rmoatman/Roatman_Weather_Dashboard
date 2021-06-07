@@ -8,8 +8,6 @@
     <title>Weather Dashboard</title>
     <!-- Link to Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-
-
     <link rel="stylesheet" href="Assets/style.css">
   </head>
 
@@ -19,7 +17,7 @@
     <div class="container">
 
       <header class="jumbotron">
-        <h1 class="display-5">Local Weather Tracker</h1>
+        <h1 class="display-5">Local Weather Dashboard</h1>
         <p id="#repos-container"></p>
       </header>
 
@@ -92,13 +90,11 @@
             <!-- id="UV Index" will populate from the apiUrlUV -->
             <div class="card-body lightblue">
               <h5 class="card-title forecast"></h5>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-primary" id="temperature">Temperature:</li>
-                <li class="list-group-item list-group-item-primary" id="humidity">Humidity:</li>
-                <li class="list-group-item list-group-item-primary" id="windspeed">Wind speed:</li>
-                <li class="list-group-item list-group-item-primary" id="uvindex">UV Index:</li>
-                <li class="list-group-item list-group-item-primary" id="currentdate">Current Date:</li>
-              </ul>
+              <p class="pl-3" id="temperature">Temperature: </p>
+              <p class="pl-3" id="humidity">Humidity: </p>
+              <p class="pl-3" id="windspeed">Windspeed: </p>
+              <p class="pl-3">UV Index: <span id="uvindex"></span></p>
+              <p class="pl-3" id="currentdate"></p>
             </div>
             <!-- End of data from apiUrl -->
 
