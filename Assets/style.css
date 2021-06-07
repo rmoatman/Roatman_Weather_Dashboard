@@ -7,11 +7,12 @@
     background-color: var(--bs-primary);
 }
 
-.list-group-item-primary {
-    background-color: var(--bs-primary);
-    border: none;
-    max-height: 40px;
-    font-size: large;
+.smallfont {
+    font-size: 14px;
+}
+
+p .center {
+justify-content: center;
 }
 
 img {
@@ -32,11 +33,8 @@ height: 30px;
 }
 
 /* UV Conditions */
-.bg-low { /* 0-2*/
-    background-color: green;
-}
 
-.moderate { /* 3-5*/
+.bg-moderate { /* 3-5*/
     background-color: yellow;
 }
 
@@ -48,3 +46,4 @@ height: 30px;
 .bg-extreme { /* 11+*/
     background-color: violet;
 }
+
