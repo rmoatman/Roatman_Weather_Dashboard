@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <!-- Link to Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+
+    <link rel="stylesheet" href="Assets/style.css">
+  </head>
+
+
+  <body>
+
+    <div class="container">
+
+      <header class="jumbotron">
+        <h1 class="display-4">Weather Tracker</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+          featured content or information.</p>
+        <p id="#repos-container"></p>
+      </header>
+
+      <!-- This row contains two columns -->
+      <div class="row">
+        <!-- This is the left column containing the location form and saved-location buttons -->
+        <!-- Enter the City and State -->
+        <div class="col-3">
+
+          <!-- This is the card that holds the city and state input form and the saved location buttons -->
+          <div class="card" style="width: 100%;">
+
+            <!-- This is the card-body which holds the input form -->
+            <!-- id="city" is used to create the "searchlocation" for the API URL -->
+            <!-- id="state" is used to create the "searchlocation" for the API URL -->
+            <!-- id="fetch-button" is used in the "submitButtonEl" EventListener -->
+            <div class="card-body">
+              <h5 class="card-title">Search Location</h5>
+              <p class="card-text">Please enter the City and its 2-letter State abbreviation. Then press Submit</p>
+
+              <form>
+                <div class="form-group">
+                  <label for="citytoSearch">City</label>
+                  <input type="text" class="form-control" id="city" placeholder="City">
+                </div>
+
+                <div class="form-group">
+                  <label for="statetoSearch">State</label>
+                  <input type="text" class="form-control" id="state" placeholder="2-Letter Abbreviation">
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="fetch-button">Submit</button>
+              </form>
+              <!-- End of city and state input form -->
+
+            </div>
+            <!-- End of card-body -->
+
+            <!-- Card containing saved locations -->
+            <div class="card" style="width: 100%;">
+              <!-- Saved location buttons -->
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Previous Location Button</li>
+                <li class="list-group-item">Previous Location Button</li>
+                <li class="list-group-item">Previous Location Button</li>
+              </ul>
+            </div>
+            <!-- End of card containing saved locations -->
+
+          </div>
+          <!-- End of card holding the city and state input form and the saved location buttons -->
+
+        </div>
+        <!-- End of left column -->
+
+        <!-- This is the right column containing the current and 5-day forcasts -->
+        <div class="col-9">
+
+          <!-- This is the card containing the current day forecast -->
+          <div class="card pb-3" style="width: 100%;">
+
+            <!-- Data from the apiUrl and apiUrlUV will populate in this card  -->
+            <!-- id="cityname" will populate from the apiUrl -->
+            <!-- id="currentdate" will populate from the apiUrl -->
+            <!-- id="weathericon" will populate with an image from a link created by data from the apiUrl -->
+            <!-- id="temperature" will populate from the apiUrl -->
+            <!-- id="cityname" will populate from the apiUrl -->
+            <!-- id="humidity" will populate from the apiUrl -->
+            <!-- id="windspeed" will populate from the apiUrl -->
+            <!-- id="UV Index" will populate from the apiUrlUV -->
+            <div class="card-body">
+              <h5 class="card-title">Today's Forecast</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item" id="cityname">City Name:</li>
+                <li class="list-group-item" id="currentdate">Current Date:</li>
+                <li class="list-group-item" id="weathericon"></li>
+                <li class="list-group-item" id="temperature">Temperature:</li>
+                <li class="list-group-item" id="humidity">Humidity:</li>
+                <li class="list-group-item" id="windspeed">Wind speed:</li>
+                <li class="list-group-item" id="uvindex">UV Index:</li>
+              </ul>
+            </div>
+            <!-- End of data from apiUrl -->
+
+          </div>
+          <!-- End of card containing today's forecast -->
+
+          <!-- Div containing 5 cards--each containing 1 of the next 5-day's forecasts -->
+          <div class="col-12"> <!-- This line was included to right and left align the 5-day forecast cards with today's forecast card -->
+            
+            <div class="row" style="width: 103.5%"> <!-- This line was also included to right and left align the 5-day forecast cards with today's forecast card -->
+
+              <!-- class="5day" is used to style the fonts and ul in the 5-day forecast cards -->
+              <div class="card" style="width: 20%">
+                <div class="card-body">
+                  <h5 class="card-title">Day 1</h5>
+                  <li class="list-group-item 5day" id="currentdate">Current Date:</li>
+                  <li class="list-group-item 5day" id="weathericon">Weather Icon</li>
+                  <li class="list-group-item 5day" id="temperature">Temperature:</li>
+                  <li class="list-group-item 5day" id="humidity">Humidity:</li>
+                  <li class="list-group-item 5day" id="windspeed">Wind speed:</li>
+                  <li class="list-group-item 5day" id="uvindex">UV Index:</li>
+                </div>
+              </div>
+
+              <div class="card" style="width: 20%">
+                <div class="card-body">
+                  <h5 class="card-title">Day 2</h5>
+                  <li class="list-group-item 5day" id="currentdate">Current Date:</li>
+                  <li class="list-group-item 5day" id="weathericon">Weather Icon</li>
+                  <li class="list-group-item 5day" id="temperature">Temperature:</li>
+                  <li class="list-group-item 5day" id="humidity">Humidity:</li>
+                  <li class="list-group-item 5day" id="windspeed">Wind speed:</li>
+                  <li class="list-group-item 5day" id="uvindex">UV Index:</li>
+                </div>
+              </div>
+
+              <div class="card" style="width: 20%">
+                <div class="card-body">
+                  <h5 class="card-title">Day 3</h5>
+                  <li class="list-group-item 5day" id="currentdate">Current Date:</li>
+                  <li class="list-group-item 5day" id="weathericon">Weather Icon</li>
+                  <li class="list-group-item 5day" id="temperature">Temperature:</li>
+                  <li class="list-group-item 5day" id="humidity">Humidity:</li>
+                  <li class="list-group-item 5day" id="windspeed">Wind speed:</li>
+                  <li class="list-group-item 5day" id="uvindex">UV Index:</li>
+                </div>
+              </div>
+
+              <div class="card" style="width: 20%">
+                <div class="card-body">
+                  <h5 class="card-title">Day 4</h5>
+                  <li class="list-group-item 5day" id="currentdate">Current Date:</li>
+                  <li class="list-group-item 5day" id="weathericon">Weather Icon</li>
+                  <li class="list-group-item 5day" id="temperature">Temperature:</li>
+                  <li class="list-group-item 5day" id="humidity">Humidity:</li>
+                  <li class="list-group-item 5day" id="windspeed">Wind speed:</li>
+                  <li class="list-group-item 5day" id="uvindex">UV Index:</li>
+                </div>
+              </div>
+
+              <div class="card" style="width: 20%">
+                <div class="card-body">
+                  <h5 class="card-title">Day 5</h5>
+                  <li class="list-group-item 5day" id="currentdate">Current Date:</li>
+                  <li class="list-group-item 5day" id="weathericon">Weather Icon</li>
+                  <li class="list-group-item 5day" id="temperature">Temperature:</li>
+                  <li class="list-group-item 5day" id="humidity">Humidity:</li>
+                  <li class="list-group-item 5day" id="windspeed">Wind speed:</li>
+                  <li class="list-group-item 5day" id="uvindex">UV Index:</li>
+                </div>
+              </div>
+
+            </div>
+            <!-- End of the row containing the 5-day forecast cards -->
+
+          </div>
+          <!-- End of the div containing the 5 day forecast cards -->
+
+        </div>
+        <!-- End of right column -->
+
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="./Assets/script.js"></script>
+
+  </body> 
+
+</html>
+
+<!-- Still to do -->
+<!-- get rid of lines and make smaller rows in today's forecast -->
+<!-- Font for 5 day forecast bullets smaller -->
