@@ -1,7 +1,13 @@
 var usercityEl = document.querySelector("#city");
 var userstateEl = document.querySelector("#state");
 var submitButtonEl = document.querySelector("#fetch-button");
-var weathericonEl = document.querySelector("#weathericon");
+var citynameEl = document.querySelector(".forecast");
+var currentdateEl = document.querySelector("#currentdate");
+var temperatureEl = document.querySelector("#temperature");
+var humidityEl = document.querySelector("#humidity");
+var windspeedEl = document.querySelector("#windspeed");
+var uvindexEl = document.querySelector("#uvindex");
+var forecastcardEl = document.querySelector(".forecastcard");
 
 
 /*  */
@@ -33,20 +39,6 @@ var formSubmitHandler = function (event) {
 
 
 
-/* var buttonClickHandler = function (event) {
-  var language = event.target.getAttribute('data-language');
-
-  if (language) {
-    getFeaturedRepos(language);
-
-    repoContainerEl.textContent = '';
-  }
-}; */
-
-
-
-
-
 
 
 
@@ -65,21 +57,24 @@ var getUserRepos = function (searchlocation) {
           console.log(data);
           console.log(data.name);
 
-          var timestamp = moment.unix(1622924403);
-          console.log(timestamp.format("MM/DD/YY"));
+          forecastcardEl.classList.remove("hide");
 
           var icon = "https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
-          weathericonEl.innerHTML = "<img src=\"" + icon + "\">";
-          console.log(icon);
+          citynameEl.innerHTML = usercityEl.value.toUpperCase() + ", " + userstateEl.value.toUpperCase() + " <img src=\"" + icon + "\">";
 
-          console.log(data.main.temp + "*F");
-          console.log(data.main.humidity + "%");
-          console.log(data.wind.speed + " MPH");
+          var timestamp = moment.unix(1622924403);
+          currentdateEl.innerHTML = "Date: " + timestamp.format("MM/DD/YY");
+
+
+          temperatureEl.innerHTML = "Temperature: " + data.main.temp + " \u00B0F";
+          humidityEl.innerHTML = "Humidity: " + data.main.humidity + "%";
+          windspeedEl.innerHTML = "Windspeed: " + data.wind.speed + " MPH";
+
+          
 
           console.log(data.coord.lon + ": Longitude");
           console.log(data.coord.lat + ": Latitude");
-
-          // Fetch the API using coordinates that contains the UV data //
+          // Fetch the apiUrlUV using coordinates from the apiUrl to get the UV and 5-day forcast data //
           var apiUrlUV = "http://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&exclude=minutely,hourly&units=imperial&appid=a35a92d1b4df3733dc350ab5111e30d1"
           fetch(apiUrlUV)
             .then(function (response) {
@@ -87,7 +82,7 @@ var getUserRepos = function (searchlocation) {
               if (response.ok) {
                 response.json().then(function (dataUV) {
                   console.log(dataUV);
-                  console.log(dataUV.current.uvi + ": UV Index");
+                  uvindexEl.innerHTML = "Current UV Index: " + dataUV.current.uvi;
                 });
               } 
             });
@@ -167,4 +162,20 @@ var getUserRepos = function (searchlocation) {
                 });
               };
             }); */
+
+       
+
+
+
+
+
+/* var buttonClickHandler = function (event) {
+  var language = event.target.getAttribute('data-language');
+
+  if (language) {
+    getFeaturedRepos(language);
+
+    repoContainerEl.textContent = '';
+  }
+}; */
 

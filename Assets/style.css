@@ -1,0 +1,23 @@
+:root {
+    --bs-primary: #adc6ec;
+}
+
+
+.lightblue {
+    background-color: var(--bs-primary);
+}
+
+.list-group-item-primary {
+    background-color: var(--bs-primary);
+    border: none;
+    max-height: 40px;
+}
+
+img {
+height: 30px;
+}
+
+
+.hide {
+    display: none;
+}
