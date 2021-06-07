@@ -11,6 +11,7 @@
     background-color: var(--bs-primary);
     border: none;
     max-height: 40px;
+    font-size: large;
 }
 
 img {
@@ -22,6 +23,35 @@ height: 30px;
     display: none;
 }
 
-.forcastcard {
+.forecastcard {
     border: none;
+}
+
+.fivedayforecastcard {
+    border: none;
+}
+
+/* UV Conditions */
+.low { /* 0-2*/
+    background-color: green;
+}
+
+/* UV Conditions */
+.moderate { /* 3-5*/
+    background-color: yellow;
+}
+
+/* UV Conditions */
+.high { /* 6-7*/
+    background-color: orange;
+}
+
+/* UV Conditions */
+.veryhigh { /* 8-10*/
+    background-color: red;
+}
+
+/* UV Conditions */
+.extreme { /* 11+*/
+    background-color: violet;
 }

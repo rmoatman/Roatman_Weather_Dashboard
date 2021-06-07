@@ -19,7 +19,7 @@
     <div class="container">
 
       <header class="jumbotron">
-        <h1 class="display-4">Local Weather Tracker</h1>
+        <h1 class="display-5">Local Weather Tracker</h1>
         <p id="#repos-container"></p>
       </header>
 
@@ -78,35 +78,36 @@
         <!-- This is the right column containing the current and 5-day forcasts -->
         <div class="col-9">
 
+          <!-- DAILY FORECAST CARD -->
           <!-- This is the card containing the current day forecast -->
-          <div class="card pb-3" style="width: 100%;">
+          <div class="card pb-3 forecastcard hide" style="width: 100%;">
 
             <!-- Data from the apiUrl and apiUrlUV will populate in this card  -->
             <!-- id="cityname" will populate from the apiUrl -->
-            <!-- id="currentdate" will populate from the apiUrl -->
             <!-- id="weathericon" will populate with an image from a link created by data from the apiUrl -->
+            <!-- id="currentdate" will populate from the apiUrl -->
             <!-- id="temperature" will populate from the apiUrl -->
-            <!-- id="cityname" will populate from the apiUrl -->
             <!-- id="humidity" will populate from the apiUrl -->
             <!-- id="windspeed" will populate from the apiUrl -->
             <!-- id="UV Index" will populate from the apiUrlUV -->
-            <div class="card-body forecastcard lightblue hide">
+            <div class="card-body lightblue">
               <h5 class="card-title forecast"></h5>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-primary" id="currentdate">Current Date:</li>
                 <li class="list-group-item list-group-item-primary" id="temperature">Temperature:</li>
                 <li class="list-group-item list-group-item-primary" id="humidity">Humidity:</li>
                 <li class="list-group-item list-group-item-primary" id="windspeed">Wind speed:</li>
                 <li class="list-group-item list-group-item-primary" id="uvindex">UV Index:</li>
+                <li class="list-group-item list-group-item-primary" id="currentdate">Current Date:</li>
               </ul>
             </div>
             <!-- End of data from apiUrl -->
 
           </div>
-          <!-- End of card containing today's forecast -->
+          <!-- End of DAILY FORECAST CARD-->
 
+          <!-- FIVE DAY FORECAST CARDS -->
           <!-- Div containing 5 cards--each containing 1 of the next 5-day's forecasts -->
-          <div class="col-12"> <!-- This line was included to right and left align the 5-day forecast cards with today's forecast card -->
+          <div class="col-12 fivedayforecastcard hide"> <!-- This line was included to right and left align the 5-day forecast cards with today's forecast card -->
             
             <div class="row" style="width: 103.5%"> <!-- This line was also included to right and left align the 5-day forecast cards with today's forecast card -->
 
@@ -175,7 +176,7 @@
             <!-- End of the row containing the 5-day forecast cards -->
 
           </div>
-          <!-- End of the div containing the 5 day forecast cards -->
+          <!-- End of FIVE DAY FORECAST CARDS -->
 
         </div>
         <!-- End of right column -->

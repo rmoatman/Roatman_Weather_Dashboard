@@ -1,14 +1,14 @@
 var usercityEl = document.querySelector("#city");
 var userstateEl = document.querySelector("#state");
 var submitButtonEl = document.querySelector("#fetch-button");
-var citynameEl = document.querySelector(".forecast");
+var citynameEl = document.querySelector(".forecast"); // used to add city name and weather icon to daily forecast card //
 var currentdateEl = document.querySelector("#currentdate");
 var temperatureEl = document.querySelector("#temperature");
 var humidityEl = document.querySelector("#humidity");
 var windspeedEl = document.querySelector("#windspeed");
 var uvindexEl = document.querySelector("#uvindex");
-var forecastcardEl = document.querySelector(".forecastcard");
-
+var forecastcardEl = document.querySelector(".forecastcard"); // used to hide daily forecast card //
+var fivedayforecastcardEl = document.querySelector(".fivedayforecastcard");
 
 /*  */
 var repoContainerEl = document.querySelector('#repos-container');
@@ -58,17 +58,18 @@ var getUserRepos = function (searchlocation) {
           console.log(data.name);
 
           forecastcardEl.classList.remove("hide");
+          fivedayforecastcardEl.classList.remove("hide");
 
           var icon = "https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
           citynameEl.innerHTML = usercityEl.value.toUpperCase() + ", " + userstateEl.value.toUpperCase() + " <img src=\"" + icon + "\">";
 
-          var timestamp = moment.unix(1622924403);
-          currentdateEl.innerHTML = "Date: " + timestamp.format("MM/DD/YY");
+          var timestamp = moment.unix(data.dt);
+          currentdateEl.innerHTML = "Last Updated:  " + timestamp.format("MMMM Do YYYY, h:mm:ss a");
 
 
-          temperatureEl.innerHTML = "Temperature: " + data.main.temp + " \u00B0F";
-          humidityEl.innerHTML = "Humidity: " + data.main.humidity + "%";
-          windspeedEl.innerHTML = "Windspeed: " + data.wind.speed + " MPH";
+          temperatureEl.innerHTML = "Temperature:  " + data.main.temp + " \u00B0F";
+          humidityEl.innerHTML = "Humidity:  " + data.main.humidity + "%";
+          windspeedEl.innerHTML = "Windspeed:  " + data.wind.speed + " MPH";
 
           
 
@@ -82,7 +83,37 @@ var getUserRepos = function (searchlocation) {
               if (response.ok) {
                 response.json().then(function (dataUV) {
                   console.log(dataUV);
-                  uvindexEl.innerHTML = "Current UV Index: " + dataUV.current.uvi;
+                  var uvindexnumber = dataUV.current.uvi;
+                  uvindexEl.innerHTML = "Current UV Index: " + uvindexnumber;
+                  
+
+
+                    switch (true) {
+
+                      case uvindexnumber >= 11:
+                        uvindexEl.classList.add("extreme");
+                      break;
+
+                      case uvindexnumber >= 8:
+                        uvindexEl.classList.add("veryhigh");
+                      break;
+
+                      case uvindexnumber >= 6:
+                        uvindexEl.classList.add("high");
+                      break;
+
+                      case uvindexnumber >= 3:
+                        uvindexEl.classList.add("moderate");
+                      break;
+
+                      case uvindexnumber >= 0:
+                        uvindexEl.classList.add("low");
+                      break;
+
+                      default:
+                   
+                    }
+
                 });
               } 
             });
