@@ -22,11 +22,11 @@ var currentdate2El = document.querySelector("#currentdate2");
 var currentdate3El = document.querySelector("#currentdate3");
 var currentdate4El = document.querySelector("#currentdate4");
 var currentdate5El = document.querySelector("#currentdate5");
-var weathericon1EL = document.querySelector("#weathericon1");
-var weathericon2EL = document.querySelector("#weathericon2");
-var weathericon3EL = document.querySelector("#weathericon3");
-var weathericon4EL = document.querySelector("#weathericon4");
-var weathericon5EL = document.querySelector("#weathericon5");
+var weathericon1el = document.querySelector("#weathericon1");
+var weathericon2el = document.querySelector("#weathericon2");
+var weathericon3el = document.querySelector("#weathericon3");
+var weathericon4el = document.querySelector("#weathericon4");
+var weathericon5el = document.querySelector("#weathericon5");
 var temperature1El = document.querySelector("#temperature1");
 var temperature2El = document.querySelector("#temperature2");
 var temperature3El = document.querySelector("#temperature3");
@@ -37,11 +37,11 @@ var windspeed2El = document.querySelector("#windspeed2");
 var windspeed3El = document.querySelector("#windspeed3");
 var windspeed4El = document.querySelector("#windspeed4");
 var windspeed5El = document.querySelector("#windspeed5");
-var humidity1EL = document.querySelector("#humidity1");
-var humidity2EL = document.querySelector("#humidity2");
-var humidity3EL = document.querySelector("#humidity3");
-var humidity4EL = document.querySelector("#humidity4");
-var humidity5EL = document.querySelector("#humidity5");
+var humidity1el = document.querySelector("#humidity1");
+var humidity2el = document.querySelector("#humidity2");
+var humidity3el = document.querySelector("#humidity3");
+var humidity4el = document.querySelector("#humidity4");
+var humidity5el = document.querySelector("#humidity5");
 var searchheading1el = document.querySelector("#recent1")
 var searchheading2el = document.querySelector("#recent2")
 var searchlocation = "";
@@ -112,7 +112,11 @@ var getlocations = function() {
       recentcitystate.setAttribute("type", "button");
       recentcitystate.className = "list-group-item locbutton";
       recentcitystate.setAttribute("value", locationarray[i]);
-      recentcitystate.textContent = locationarray[i]; // future development - insert space between city and state //
+
+    var sep = locationarray[i].split(",");
+
+
+      recentcitystate.textContent = sep[0] + ", " + sep[1]; // future development - insert space between city and state //
       locationslistUl.appendChild(recentcitystate);
   }
 
@@ -212,49 +216,49 @@ var getUserRepos = function (searchlocation) {
                     // Look up Url for appropriate weather icon.png //
                     var icon1 = "https://openweathermap.org/img/wn/" + dataUV.daily[1].weather[0].icon + "@2x.png";
                     // Add weather icon after city, state then add to card //
-                    weathericon1EL.innerHTML = "<img src=\"" + icon1 + "\">";
+                    weathericon1el.innerHTML = "<img src=\"" + icon1 + "\">";
 
                     // Add temperature, humidity, and windspeed to card //
-                    temperature1El.innerHTML = "Temp.:  " + dataUV.daily[1].temp.day + " \u00B0F";
+                    temperature1El.innerHTML = "Temp:  " + dataUV.daily[1].temp.day + " \u00B0F";
                     windspeed1El.innerHTML = "Wind:  " + dataUV.daily[1].wind_speed + " MPH";
-                    humidity1EL.innerHTML = "Humidity:  " + dataUV.daily[1].humidity + "%";
+                    humidity1el.innerHTML = "Humidity:  " + dataUV.daily[1].humidity + "%";
 
 
                     var icon2 = "https://openweathermap.org/img/wn/" + dataUV.daily[2].weather[0].icon + "@2x.png";
                     // Add weather icon after city, state then add to card //
-                    weathericon2EL.innerHTML = "<img src=\"" + icon2 + "\">";
+                    weathericon2el.innerHTML = "<img src=\"" + icon2 + "\">";
 
                     // Add temperature, humidity, and windspeed to card //
-                    temperature2El.innerHTML = "Temp.:  " + dataUV.daily[2].temp.day + " \u00B0F";
+                    temperature2El.innerHTML = "Temp:  " + dataUV.daily[2].temp.day + " \u00B0F";
                     windspeed2El.innerHTML = "Wind:  " + dataUV.daily[2].wind_speed + " MPH";
-                    humidity2EL.innerHTML = "Humidity:  " + dataUV.daily[2].humidity + "%";
+                    humidity2el.innerHTML = "Humidity:  " + dataUV.daily[2].humidity + "%";
 
                     var icon3 = "https://openweathermap.org/img/wn/" + dataUV.daily[3].weather[0].icon + "@2x.png";
                     // Add weather icon after city, state then add to card //
-                    weathericon3EL.innerHTML = "<img src=\"" + icon3 + "\">";
+                    weathericon3el.innerHTML = "<img src=\"" + icon3 + "\">";
 
                     // Add temperature, humidity, and windspeed to card //
-                    temperature3El.innerHTML = "Temp.:  " + dataUV.daily[3].temp.day + " \u00B0F";
+                    temperature3El.innerHTML = "Temp:  " + dataUV.daily[3].temp.day + " \u00B0F";
                     windspeed3El.innerHTML = "Wind:  " + dataUV.daily[3].wind_speed + " MPH";
-                    humidity3EL.innerHTML = "Humidity:  " + dataUV.daily[3].humidity + "%";
+                    humidity3el.innerHTML = "Humidity:  " + dataUV.daily[3].humidity + "%";
 
                     var icon4 = "https://openweathermap.org/img/wn/" + dataUV.daily[4].weather[0].icon + "@2x.png";
                     // Add weather icon after city, state then add to card //
-                    weathericon4EL.innerHTML = "<img src=\"" + icon4 + "\">";
+                    weathericon4el.innerHTML = "<img src=\"" + icon4 + "\">";
 
                     // Add temperature, humidity, and windspeed to card //
-                    temperature4El.innerHTML = "Temp.:  " + dataUV.daily[4].temp.day + " \u00B0F";
+                    temperature4El.innerHTML = "Temp:  " + dataUV.daily[4].temp.day + " \u00B0F";
                     windspeed4El.innerHTML = "Wind:  " + dataUV.daily[4].wind_speed + " MPH";
-                    humidity4EL.innerHTML = "Humidity:  " + dataUV.daily[4].humidity + "%";
+                    humidity4el.innerHTML = "Humidity:  " + dataUV.daily[4].humidity + "%";
 
                     var icon5 = "https://openweathermap.org/img/wn/" + dataUV.daily[5].weather[0].icon + "@2x.png";
                     // Add weather icon after city, state then add to card //
-                    weathericon5EL.innerHTML = "<img src=\"" + icon5 + "\">";
+                    weathericon5el.innerHTML = "<img src=\"" + icon5 + "\">";
 
                     // Add temperature, humidity, and windspeed to card //
                     temperature5El.innerHTML = "Temp.:  " + dataUV.daily[5].temp.day + " \u00B0F";
                     windspeed5El.innerHTML = "Wind:  " + dataUV.daily[5].wind_speed + " MPH";
-                    humidity5EL.innerHTML = "Humidity:  " + dataUV.daily[5].humidity + "%";
+                    humidity5el.innerHTML = "Humidity:  " + dataUV.daily[5].humidity + "%";
 
                     savetolocalstorage(searchlocation);
                 });
