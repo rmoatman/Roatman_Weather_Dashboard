@@ -1,9 +1,11 @@
 // FUNCTION LIST //
 // formSubmitHandler - when submit button is clicked, gets user city and state and combines into one variable for use in API //
-// getUserRepos - Fetches apiUrl and apiUrlUv to get forcasts.  Populates forcast cards.
+// getUserRepos - Fetches apiUrl and apiUrlUv to get forcasts.  Populates forecast cards.
+// addlocationbutton - //
 
 
 // VARIABLES //
+var locationarray = [];
 var usercityEl = document.querySelector("#city");
 var userstateEl = document.querySelector("#state");
 var submitButtonEl = document.querySelector("#fetch-button");
@@ -48,19 +50,94 @@ var repoSearchTerm = document.querySelector('#repo-search-term');
 
 // FUNCTIONS //
 
+// Creates searchlocation string from user input //
 var formSubmitHandler = function (event) {
   event.preventDefault();
-
+  console.log("1");
   var searchlocation = usercityEl.value.trim() + "," + userstateEl.value.trim();
 
-  if (searchlocation) {
+  if (searchlocation) { // checks to make sure the city isn't blank //
+/*     savedsearchedlocation(searchlocation); */
     getUserRepos(searchlocation);
+    console.log("savedsearchlocation");
 
-  } else {
-    alert('Please try again');
-  }
-};
+/*     for (i = 0; i < locationarray.length; i++) {
+      if (searchlocation === locationarray[i]){
+        locationarray.splice(i,1);
+      } else { */
+        locationarray.push(searchlocation);
+        localStorage.setItem("locations", JSON.stringify(locationarray));
+      } else {
+        alert('Please try again');
+      }
+    };
+  
+  
+
 // end of formSubmitHandler //
+
+
+/* var savedsearchedlocation = function(searchlocation){
+console.log(savedsearchlocation);
+  for (i = 0; i < locationarray.length; i++) {
+    if (searchlocation === locationarray[i]){
+      locationarray.splice(i,1);
+    } else {
+      locationarray.push(searchlocation);
+      localStorage.setItem("locations", JSON.stringify(locationarray));
+    }
+  }
+} */
+
+
+
+
+/* // Saves locations into local storage //
+var savelocation = function(searchlocation) {
+
+   // Prevents duplicate city from being saved and moves it to end of array
+  for (var i = 0; i < locationarray.length; i++) {
+      if (searchlocation === locationarray[i]) {
+          locationarray.splice(i, 1);
+      }
+  }
+  locationarray.push(searchlocation);
+  localStorage.setItem("locations", JSON.stringify(locationarray));
+}
+
+
+// loads cities from local storage
+var getlocations = function() {
+  locationarray = JSON.parse(localStorage.getItem("searchlocation"));
+
+  if (!locationarray) {
+    locationarray = [];
+      return false;
+/*   } else if (locationarray.length > 5) {
+      // saves only the five most recent cities
+      locationarray.shift();
+  }
+}
+
+  var savedlocations = document.querySelector("#savedsearchlist");
+  var locationslistUl = document.createElement("li");
+  locationslistUl.className = "list-group savedlocations";
+  savedlocations.appendChild(locationslistUl);
+
+  for (var i = 0; i < locationarray.length; i++) {
+      var recentcitystate = document.createElement("button");
+      recentcitystate.setAttribute("type", "button");
+      recentcitystate.className = "list-group-item";
+      recentcitystate.setAttribute("value", locationarray[i]);
+      recentcitystate.textContent = toUpperCase(locationarray[i]);
+      locationlistUl.appendChild(recentcitystate);
+  } */
+
+
+
+
+
+
 
 var getUserRepos = function (searchlocation) {
 
@@ -242,41 +319,3 @@ var getUserRepos = function (searchlocation) {
      // EXECUTION //
 
       submitButtonEl.addEventListener('click', formSubmitHandler);
-
-
-
-//don't forget to add to favorites//
-
-
-
-/*   var apiUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + zip + ",US&units=imperial&appid=a35a92d1b4df3733dc350ab5111e30d1" */
-/* var nameInputEl = document.querySelector('#username'); */
-/* zipButtonEl.addEventListener('click', buttonClickHandler); */
-          /* //Fetch the API for the 5-Day Forecast //
-          var apiUrl5D = "https://api.openweathermap.org/data/2.5/onecall?" + searchlocation + ",US&exclude=minutely,hourly&cnt=5&units=imperial&appid=a35a92d1b4df3733dc350ab5111e30d1"
-          fetch(apiUrl5D)
-            .then(function (response) {
-        
-              if (response.ok) {
-                response.json().then(function (data5D) {
-                  console.log(data5D);
-                });
-              };
-            }); */
-
-       
-
-
-
-
-
-/* var buttonClickHandler = function (event) {
-  var language = event.target.getAttribute('data-language');
-
-  if (language) {
-    getFeaturedRepos(language);
-
-    repoContainerEl.textContent = '';
-  }
-}; */
-
