@@ -49,6 +49,18 @@ var savedlocations = [];
 var wasbuttonclicked = 0;
 
 
+var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+  return new bootstrap.Dropdown(dropdownToggleEl)
+})
+
+
+
+
+
+
+
+
 // FUNCTIONS //
 
 // Creates searchlocation string from user input //

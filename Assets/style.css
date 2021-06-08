@@ -53,11 +53,11 @@ h5.recentheader {
 /* UV Conditions */
 
 .bg-moderate { /* 3-5*/
-    background-color: yellow;
+    background-color: var(--yellow);
 }
 
 .bg-high { /* 6-7*/
-    background-color: orange;
+    background-color: var(--orange);
 }
 
 
