@@ -128,7 +128,7 @@ var getlocations = function() {
 //Fetch the API that contains today's forecast for the city and state submitted //
 var getUserRepos = function (searchlocation) {
 
-  var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + searchlocation + ",US&units=imperial&appid=a35a92d1b4df3733dc350ab5111e30d1"
+  var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchlocation + ",US&units=imperial&appid=a35a92d1b4df3733dc350ab5111e30d1"
 
   fetch(apiUrl)
     .then(function (response) {
@@ -165,7 +165,7 @@ var getUserRepos = function (searchlocation) {
           currentdateEl.innerHTML = "Last Updated:  " + timestamp.format("MMMM Do YYYY, h:mm:ss a");
           
           // Fetch the apiUrlUV using coordinates from the apiUrl to get the UV and 5-day forcast data //
-          var apiUrlUV = "http://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&exclude=minutely,hourly&units=imperial&appid=a35a92d1b4df3733dc350ab5111e30d1"
+          var apiUrlUV = "https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&exclude=minutely,hourly&units=imperial&appid=a35a92d1b4df3733dc350ab5111e30d1"
           fetch(apiUrlUV)
             .then(function (response) {
 
