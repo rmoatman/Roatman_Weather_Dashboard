@@ -98,6 +98,7 @@ var getlocations = function() {
         locationarray.shift();
         }*/
   }
+
   var savedlocations = document.querySelector("#savedsearchlist");
   var locationslistUl = document.createElement("ul");
   locationslistUl.className = "list-group savedbutton";
@@ -106,23 +107,22 @@ var getlocations = function() {
   for (var i = 0; i < locationarray.length; i++) {
       var recentcitystate = document.createElement("button");
       recentcitystate.setAttribute("type", "button");
-      recentcitystate.className = "list-group-item";
+      recentcitystate.className = "list-group-item locbutton";
       recentcitystate.setAttribute("value", locationarray[i]);
-      recentcitystate.textContent = locationarray[i];
+      recentcitystate.textContent = locationarray[i]; // future development - insert space between city and state //
       locationslistUl.appendChild(recentcitystate);
   }
-
-  };
-
-
+};
+// end of getlocations //
 
 
 
+
+//Fetch the API that contains today's forecast for the city and state submitted //
 var getUserRepos = function (searchlocation) {
 
   var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + searchlocation + ",US&units=imperial&appid=a35a92d1b4df3733dc350ab5111e30d1"
 
-  //Fetch the API that contains today's forecast for the city and state submitted //
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
@@ -254,49 +254,12 @@ var getUserRepos = function (searchlocation) {
       } else {
         alert("Error: " + response.statusText);
       };
-
     });
 };
 // end of getUserRepos //
 
 
-
-      var displayRepos = function (repos, searchTerm) {
-        if (repos.length === 0) {
-          repoContainerEl.textContent = 'No repositories found.';
-          return;
-        }
-
-        repoSearchTerm.textContent = searchTerm;
-
-        for (var i = 0; i < repos.length; i++) {
-          var repoName = repos[i].owner.login + '/' + repos[i].name;
-
-          var repoEl = document.createElement('div');
-          repoEl.classList = 'list-item flex-row justify-space-between align-center';
-
-          var titleEl = document.createElement('span');
-          titleEl.textContent = repoName;
-
-          repoEl.appendChild(titleEl);
-
-          var statusEl = document.createElement('span');
-          statusEl.classList = 'flex-row align-center';
-
-          if (repos[i].open_issues_count > 0) {
-            statusEl.innerHTML =
-              "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + ' issue(s)';
-          } else {
-            statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
-          }
-
-          repoEl.appendChild(statusEl);
-
-          repoContainerEl.appendChild(repoEl);
-        }
-      };
-    
-
      // EXECUTION //
       getlocations();
+
       submitButtonEl.addEventListener('click', formSubmitHandler);

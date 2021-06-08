@@ -7,6 +7,17 @@
     background-color: var(--bs-primary);
 }
 
+ul {
+    margin-top: 5px;
+    padding: 0;
+}
+.locbutton {
+    background-color: blue;
+    margin: 5px;
+    color: white;
+    padding: 5px;
+}
+
 .smallfont {
     font-size: 14px;
 }
