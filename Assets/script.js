@@ -53,27 +53,27 @@ var repoSearchTerm = document.querySelector('#repo-search-term');
 // Creates searchlocation string from user input //
 var formSubmitHandler = function (event) {
   event.preventDefault();
-  console.log("1");
+
   var searchlocation = usercityEl.value.trim() + "," + userstateEl.value.trim();
 
-  if (searchlocation) { // checks to make sure the city isn't blank //
-/*     savedsearchedlocation(searchlocation); */
-    getUserRepos(searchlocation);
-    console.log("savedsearchlocation");
-
-/*     for (i = 0; i < locationarray.length; i++) {
+  if (searchlocation !==",") { // checks to make sure the city isn't blank //
+  
+    for (i = 0; i < locationarray.length; i++) {
       if (searchlocation === locationarray[i]){
         locationarray.splice(i,1);
-      } else { */
-        locationarray.push(searchlocation);
-        localStorage.setItem("locations", JSON.stringify(locationarray));
-      } else {
-        alert('Please try again');
-      }
+      };
     };
-  
+
+    getUserRepos(searchlocation);
+    locationarray.push(searchlocation);
+    localStorage.setItem("locations", JSON.stringify(locationarray));
   
 
+  } else {
+      alert('Please try again');
+  };
+};
+ 
 // end of formSubmitHandler //
 
 
