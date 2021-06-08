@@ -113,10 +113,8 @@ var getlocations = function() {
       recentcitystate.className = "list-group-item locbutton";
       recentcitystate.setAttribute("value", locationarray[i]);
 
-    var sep = locationarray[i].split(",");
-
-
-      recentcitystate.textContent = sep[0] + ", " + sep[1]; // future development - insert space between city and state //
+      var sep = locationarray[i].split(",");
+      recentcitystate.textContent = sep[0] + ", " + sep[1];
       locationslistUl.appendChild(recentcitystate);
   }
 
@@ -145,7 +143,10 @@ var getUserRepos = function (searchlocation) {
 
           // Add weather icon after city, state then add to card //
           if (wasbuttonclicked==1){
-            citynameEl.innerHTML = searchlocation + " <img src=\"" + icon + "\">";
+            var searchagain = "";
+            var sep1 = searchlocation.split(",");
+            searchagain = sep1[0] + ", " + sep1[1];
+            citynameEl.innerHTML = searchagain + " <img src=\"" + icon + "\">";
 
           } else {      
                     
