@@ -47,6 +47,7 @@ var savedlocations = [];
 /*  */
 var repoContainerEl = document.querySelector('#repos-container');
 var repoSearchTerm = document.querySelector('#repo-search-term');
+var wasbuttonclicked = 0;
 
 
 // FUNCTIONS //
@@ -112,11 +113,11 @@ var getlocations = function() {
       recentcitystate.textContent = locationarray[i]; // future development - insert space between city and state //
       locationslistUl.appendChild(recentcitystate);
   }
+
+  var searchedcities = document.querySelector(".savedbutton");
+  searchedcities.addEventListener('click', usestored);
 };
 // end of getlocations //
-
-
-
 
 //Fetch the API that contains today's forecast for the city and state submitted //
 var getUserRepos = function (searchlocation) {
@@ -137,7 +138,14 @@ var getUserRepos = function (searchlocation) {
           var icon = "https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
 
           // Add weather icon after city, state then add to card //
+          if (wasbuttonclicked==1){
+            citynameEl.innerHTML = searchlocation + " <img src=\"" + icon + "\">";
+
+          } else {      
+                    
           citynameEl.innerHTML = usercityEl.value.toUpperCase() + ", " + userstateEl.value.toUpperCase() + " <img src=\"" + icon + "\">";
+          wasbuttonclicked==0;
+          };
 
           // Add temperature, humidity, and windspeed to card //
           temperatureEl.innerHTML = "Temperature:  " + data.main.temp + " \u00B0F";
@@ -257,6 +265,13 @@ var getUserRepos = function (searchlocation) {
     });
 };
 // end of getUserRepos //
+
+var usestored = function(event) {
+  searchlocation = event.target.getAttribute("value");
+  wasbuttonclicked = 1;
+  getUserRepos(searchlocation);
+}
+
 
 
      // EXECUTION //
