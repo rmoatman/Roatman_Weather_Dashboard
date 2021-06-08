@@ -42,7 +42,7 @@ var humidity2EL = document.querySelector("#humidity2");
 var humidity3EL = document.querySelector("#humidity3");
 var humidity4EL = document.querySelector("#humidity4");
 var humidity5EL = document.querySelector("#humidity5");
-
+var searchlocation = "";
 /*  */
 var repoContainerEl = document.querySelector('#repos-container');
 var repoSearchTerm = document.querySelector('#repo-search-term');
@@ -54,7 +54,33 @@ var repoSearchTerm = document.querySelector('#repo-search-term');
 var formSubmitHandler = function (event) {
   event.preventDefault();
 
-  var searchlocation = usercityEl.value.trim() + "," + userstateEl.value.trim();
+  searchlocation = usercityEl.value.trim() + "," + userstateEl.value.trim();
+
+  if (searchlocation !==",") { // checks to make sure the city isn't blank //
+  
+/*     for (i = 0; i < locationarray.length; i++) {
+      if (searchlocation === locationarray[i]){
+        locationarray.splice(i,1);
+      };
+    }; */
+
+    getUserRepos(searchlocation);
+
+/*     locationarray.push(searchlocation);
+    localStorage.setItem("locations", JSON.stringify(locationarray)); */
+  
+
+  } else {
+      alert('Please try again');
+  };
+};
+// end of formSubmitHandler //
+
+
+
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+function savetolocalstorage(searchlocation) {
 
   if (searchlocation !==",") { // checks to make sure the city isn't blank //
   
@@ -64,17 +90,12 @@ var formSubmitHandler = function (event) {
       };
     };
 
-    getUserRepos(searchlocation);
     locationarray.push(searchlocation);
     localStorage.setItem("locations", JSON.stringify(locationarray));
-  
-
-  } else {
-      alert('Please try again');
   };
 };
  
-// end of formSubmitHandler //
+
 
 
 /* var savedsearchedlocation = function(searchlocation){
@@ -266,7 +287,8 @@ var getUserRepos = function (searchlocation) {
                     temperature5El.innerHTML = "Temp.:  " + dataUV.daily[5].temp.day + " \u00B0F";
                     windspeed5El.innerHTML = "Wind:  " + dataUV.daily[5].wind_speed + " MPH";
                     humidity5EL.innerHTML = "Humidity:  " + dataUV.daily[5].humidity + "%";
-                    
+
+                    savetolocalstorage(searchlocation);
                 });
               } 
             });
@@ -274,6 +296,7 @@ var getUserRepos = function (searchlocation) {
       } else {
         alert("Error: " + response.statusText);
       };
+
     });
 };
 // end of getUserRepos //
