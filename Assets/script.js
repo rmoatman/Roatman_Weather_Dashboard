@@ -42,11 +42,10 @@ var humidity2EL = document.querySelector("#humidity2");
 var humidity3EL = document.querySelector("#humidity3");
 var humidity4EL = document.querySelector("#humidity4");
 var humidity5EL = document.querySelector("#humidity5");
+var searchheading1el = document.querySelector("#recent1")
+var searchheading2el = document.querySelector("#recent2")
 var searchlocation = "";
 var savedlocations = [];
-/*  */
-var repoContainerEl = document.querySelector('#repos-container');
-var repoSearchTerm = document.querySelector('#repo-search-term');
 var wasbuttonclicked = 0;
 
 
@@ -99,6 +98,9 @@ var getlocations = function() {
         locationarray.shift();
         }*/
   }
+
+  searchheading1el.classList.remove("hide");
+  searchheading2el.classList.remove("hide");
 
   var savedlocations = document.querySelector("#savedsearchlist");
   var locationslistUl = document.createElement("ul");
@@ -266,11 +268,13 @@ var getUserRepos = function (searchlocation) {
 };
 // end of getUserRepos //
 
+// Searches for a recently searched location when button is clicked //
 var usestored = function(event) {
   searchlocation = event.target.getAttribute("value");
   wasbuttonclicked = 1;
   getUserRepos(searchlocation);
 }
+// end of usestored //
 
 
 
