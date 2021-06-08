@@ -43,6 +43,7 @@ var humidity3EL = document.querySelector("#humidity3");
 var humidity4EL = document.querySelector("#humidity4");
 var humidity5EL = document.querySelector("#humidity5");
 var searchlocation = "";
+var savedlocations = [];
 /*  */
 var repoContainerEl = document.querySelector('#repos-container');
 var repoSearchTerm = document.querySelector('#repo-search-term');
@@ -53,22 +54,12 @@ var repoSearchTerm = document.querySelector('#repo-search-term');
 // Creates searchlocation string from user input //
 var formSubmitHandler = function (event) {
   event.preventDefault();
-
-  searchlocation = usercityEl.value.trim() + "," + userstateEl.value.trim();
+  
+  searchlocation = usercityEl.value.trim().toUpperCase() + "," + userstateEl.value.trim().toUpperCase();
 
   if (searchlocation !==",") { // checks to make sure the city isn't blank //
   
-/*     for (i = 0; i < locationarray.length; i++) {
-      if (searchlocation === locationarray[i]){
-        locationarray.splice(i,1);
-      };
-    }; */
-
     getUserRepos(searchlocation);
-
-/*     locationarray.push(searchlocation);
-    localStorage.setItem("locations", JSON.stringify(locationarray)); */
-  
 
   } else {
       alert('Please try again');
@@ -76,73 +67,40 @@ var formSubmitHandler = function (event) {
 };
 // end of formSubmitHandler //
 
-
-
-// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
+// Saves searchlocations to local storage //
 function savetolocalstorage(searchlocation) {
 
-  if (searchlocation !==",") { // checks to make sure the city isn't blank //
+  if (searchlocation !==",") { // Check to see if user entered data //
   
-    for (i = 0; i < locationarray.length; i++) {
+    for (i = 0; i < locationarray.length; i++) { // Check to see if data entry matches any savedlocations //
       if (searchlocation === locationarray[i]){
         locationarray.splice(i,1);
       };
     };
 
-    locationarray.push(searchlocation);
+    locationarray.push(searchlocation); // Save input to local storage locationarray //
     localStorage.setItem("locations", JSON.stringify(locationarray));
   };
 };
+// end of savetolocalstorage //
  
 
 
-
-/* var savedsearchedlocation = function(searchlocation){
-console.log(savedsearchlocation);
-  for (i = 0; i < locationarray.length; i++) {
-    if (searchlocation === locationarray[i]){
-      locationarray.splice(i,1);
-    } else {
-      locationarray.push(searchlocation);
-      localStorage.setItem("locations", JSON.stringify(locationarray));
-    }
-  }
-} */
-
-
-
-
-/* // Saves locations into local storage //
-var savelocation = function(searchlocation) {
-
-   // Prevents duplicate city from being saved and moves it to end of array
-  for (var i = 0; i < locationarray.length; i++) {
-      if (searchlocation === locationarray[i]) {
-          locationarray.splice(i, 1);
-      }
-  }
-  locationarray.push(searchlocation);
-  localStorage.setItem("locations", JSON.stringify(locationarray));
-}
-
-
-// loads cities from local storage
+// Loads cities from local storage
 var getlocations = function() {
-  locationarray = JSON.parse(localStorage.getItem("searchlocation"));
+  locationarray = JSON.parse(localStorage.getItem("locations"));
 
   if (!locationarray) {
     locationarray = [];
       return false;
-/*   } else if (locationarray.length > 5) {
-      // saves only the five most recent cities
-      locationarray.shift();
+    /*  } else if (locationarray.length > 5) {
+        // saves only the five most recent cities
+        locationarray.shift();
+        }*/
   }
-}
-
   var savedlocations = document.querySelector("#savedsearchlist");
-  var locationslistUl = document.createElement("li");
-  locationslistUl.className = "list-group savedlocations";
+  var locationslistUl = document.createElement("ul");
+  locationslistUl.className = "list-group savedbutton";
   savedlocations.appendChild(locationslistUl);
 
   for (var i = 0; i < locationarray.length; i++) {
@@ -150,11 +108,11 @@ var getlocations = function() {
       recentcitystate.setAttribute("type", "button");
       recentcitystate.className = "list-group-item";
       recentcitystate.setAttribute("value", locationarray[i]);
-      recentcitystate.textContent = toUpperCase(locationarray[i]);
-      locationlistUl.appendChild(recentcitystate);
-  } */
+      recentcitystate.textContent = locationarray[i];
+      locationslistUl.appendChild(recentcitystate);
+  }
 
-
+  };
 
 
 
@@ -340,5 +298,5 @@ var getUserRepos = function (searchlocation) {
     
 
      // EXECUTION //
-
+      getlocations();
       submitButtonEl.addEventListener('click', formSubmitHandler);
