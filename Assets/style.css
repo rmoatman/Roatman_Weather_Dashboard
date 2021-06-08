@@ -3,55 +3,32 @@
 }
 
 
-.lightblue {
+/*FORECAST CARDS */
+.lightblue { /* used to style the forecast cards */
     background-color: var(--bs-primary);
 }
 
-ul {
-    margin-top: 5px;
-    padding: 0;
-}
-.locbutton {
-    background-color: blue;
-    margin: 5px;
-    color: white;
-    padding: 5px;
+.forecastcard { /* styles the daily forecast card */
+    border: none;
 }
 
-.smallfont {
+.smallfont { /* reduces font in the 5-day forecast cards */
     font-size: 14px;
 }
 
-.center {
+.center { /* aligns headings and icons in the 5-day forecast cards */
 text-align: center;
 }
 
-img {
+img { /* resizes the weather icons located in the 5-day forecast cards */
 height: 30px;
 }
 
-.recentheader {
-    margin-left: 20px;
-}
-
-h5.recentheader {
-    margin-top: 20px;
-}
-
-.hide {
-    display: none;
-}
-
-.forecastcard {
+.fivedayforecastcard { /* styles the 5-day forecast cards */
     border: none;
 }
 
-.fivedayforecastcard {
-    border: none;
-}
-
-/* UV Conditions */
-
+/* UV CONDITIONS (conditions not included in bootstrap) */
 .bg-moderate { /* 3-5*/
     background-color: var(--yellow);
 }
@@ -60,8 +37,39 @@ h5.recentheader {
     background-color: var(--orange);
 }
 
-
 .bg-extreme { /* 11+*/
     background-color: violet;
 }
 
+
+/* SAVED LOCATIONS BUTTONS */
+.recentheader { /* styles the recent search header when visible */
+    margin-left: 20px;
+}
+
+h5.recentheader { /* styles the recent search header when visible */
+    margin-top: 20px;
+}
+
+ul { /* adds space between the saved location buttons */
+    margin-top: 5px;
+    padding: 0;
+}
+
+.locbutton { /* used to style the saved location buttons */
+    background-color: blue;
+    margin: 5px;
+    color: white;
+    padding: 5px;
+}
+
+
+/* MISCELLANEOUS */
+.hide { /* used to hide various elements as needed */
+    display: none;
+}
+
+
+/* Last Revised 6/08/21 */
+/* Raemarie Oatman raemarie.oatman@gmail.com */
+/* Homework Week 6 - 06 Server-Side APIs: Weather Dashboard */
