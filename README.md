@@ -6,38 +6,38 @@ https://rmoatman.github.io/Roatman_Weather_Dashboard/
 
 ## Description
 ~~~
-The intent of this project was to build a simple calendar application that allows a user to click on a time block to update and save events for the corresponding hour of a typical workday.  When saved, events are stored to local storage--which persists when the page is refreshed.
+The intent of this project was to build a weather dashboard which allows a user to input a city or city/state to retrieve the current and next 5 days weather forecast.  Locations retrieved are stored in localStorage and easily accessible (by buttons) until cleared by the user.  The data is retrieved using two different third-party APIs.
 
-When the user opens the planner, the current day and time is displayed at the top of the calendar.  Each time block is color-coded to indicate whether it is in the past, present, or future.
+The user should see an icon that represents the weather for the day.  Also when viewing the UV index, the user should see a color that indicates whether the conditions are favorable, moderate, or severe.  Users will also have a choice to search for a city by inputting the city/state or by clicking on a button representing a previously searched city.
 
-The code runs in the browser and features dynamically updated HTML and CSS powered by jQuery.  The project also takes advantage of Bootstrap and Moment.js.
+The code runs in the browser and features dynamically updated HTML and CSS.  The project also utilizes Bootstrap and Moment.js.
 
 The core skills demonstrated in this project include:
-    -   using Bootstrap to assist in styling 
-    -   using jQuery to identify and manage classes and ids
-    -   using Moment.js to get and update the current date and time
-    -   using setInterval to automate and loop javascript
+    - making requests to third-party APIs by using specific parameters to a URL
+    - using select API data to populate the weather dashboard using JavaScript
+    - performing DOM manipulation to populate and create elements using JavaScript
+    - using Bootstrap to assist in styling 
+    - using Moment.js to get and update the current date and time
 ~~~
-
 ## Application and Reflection
 ~~~
-Throughout this project, I made extensive use of Google's Developer tools.  I used the Console tab to monitor the progress of the code and the results of actions such as click and refresh.  I also used the Console tab to monitor what was occurring during the set intervals and during the change from one hour to the next.
+This week's coursework and previous projects prepared me for this challenge.  Like previous projects, I broke the steps down and set specific tasks to be completed each day.  First, I familiarized myself with the APIs, their documentation, identified the paths to the data I would need, and set-up my API key.  Next I coded the functionality needed to search for a city (based largely on class activity examples).  Once complete, I created the framework using Bootstrap and worked on populating the current day's forecast.  The 5-day forecast was next.
 
-I also used console.log whenever code did not work as expected.  I inserted many console.log checkpoints along the way and often found that my code wasn't working because the JavaScript had encountered a problem with earlier executed code.
+Creating the search history buttons presented the biggest challenge.  I was stumped.  I pseudo-coded what I wanted to do, but I didn't know how to do it.  I reviewed other projects and was influenced by Mila Decker's code located at https://github.com/deckiedevs/weather-dashboard/blob/main/assets/js/script.js.  Once I reviewed her process to do the same task, it made sense, and I knew how to proceed.  I also had to learn about badges to use as a visual UV indicator.
 
-The Elements tab was especially helpful when reviewing the class and id changes that were made when one hour changed to the next and elements were designated with the classes past, present, and future.  I was using the elements tab when I discovered that I needed to remove the past, present, and future classes when assigning a new class at the change of the hour.
+At one point, I realized that a city could exist in several states.  As a result I addeded a state input box to identify specific cities.   
 
-Finally, I used the Application tab to monitor what information was being stored and when.  By observing this process I discovered that trying to load local storage when nothing existed caused an error.  Consequently, I inserted the checkforLocalData function right after getting the date and time for the header.  
+Once complete, I forwarded the live link to a couple of friends and invited them to "break" my code.  I suggested that they misspell city names, omit states, search for the same city twice, refresh often, clear localStorage often--and then not at all.  What I discovered from theirs and my testing was:  A drop-down box for the states would easily eliminate misspelling of state abbreviations; I needed to create the recent search buttons during the submit event instead of upon refreshing or reloading; and the API database recognizes just a few US Territory cities.
 
-I also realized that the data for all the hours was being saved if any save button was pressed.  I think this makes sense, however, I inferred from the Acceptance Criteria that save should only save that hour's event.  As a result, I deleted the original function which stored the events to local storage and added a switch to the $("button").click.  Now, not only does the script listen for a "save", it identifies which save button was clicked and only saves that hour's event.
+Several areas that I plan to improve upon for my portfolio include: Improving accessability--bootstrap uses a lot of <div> tags; Improving the responsiveness of the page over various screen sizes; and Utilizing additional JavaScript loops to create elements (such as the 5-day forecast cards).
+~~~
+## Resources and Attributions
+~~~
+OpenWeather One Call API
+https://openweathermap.org/api/one-call-api
 
-As mentioned above, I did not initially realize that I had to remove past, present, and future classes when adding another at the hour's change.  Creating the process which changes the color of each row according to the time took the most time of any other challenge in this project.  The resulting comparetest function runs when the page opens or refreshes.  It also runs every 60 seconds.
-
-I had to research how to make the function run at that interval; figure out how to represent the current hour in a way that could be used in a conditional statement; and determine how to compare each row to the current hour. (I solved this by creating a variable with an array of objects.  Each object represents one hour and includes the military time equivalent as one of its values.)
-
-The comparetest function is lengthy and repetitive.  I am sure there are more efficient ways to perform the comparetest process (and other functions within the code).  When I learn them, I will revisit this code.  I expect that I will eventually no longer need the variable with an array of objects (instead, I will only have to save key/value pairs in local storage) and that additional jQuery will streamline code.
-
-I enjoyed this challenge.  But, the best part of this project was the two sessions I spent with other coders (one who is enrolled in the BootCamp and one who is not) discussing, brainstorming, reviewing, and troubleshooting code.  
+Mila Decker's Weather Dashboard
+https://github.com/deckiedevs/weather-dashboard/blob/main/assets/js/script.js
 ~~~
 
 ## Contact Information
@@ -47,4 +47,3 @@ I enjoyed this challenge.  But, the best part of this project was the two sessio
 - https://www.linkedin.com/in/raemarieoatman
 - https://github.com/rmoatman
 ~~~
-# Roatman_Work-Day_Scheduler
