@@ -64,24 +64,25 @@ var humidity5el = document.querySelector("#humidity5");
 
 
 // FUNCTIONS //
+
 // Creates searchlocation string from user input //
 var formSubmitHandler = function (event) {
   event.preventDefault();
-
+  
   searchlocation = usercityEl.value.trim().toUpperCase() + "," + userstateEl.value.trim().toUpperCase();
 
-  if (searchlocation !== ",") { // checks to make sure the city isn't blank //
-
+  if (searchlocation !==",") { // checks to make sure the city isn't blank //
+  
     getUserRepos(searchlocation);
 
   } else {
-    alert('Please try again');
+      alert('Please try again');
   };
 };
 // end of formSubmitHandler //
 
 // Searches for a recently searched location when button is clicked //
-var useStored = function (event) {
+var useStored = function(event) {
   searchlocation = event.target.getAttribute("value");
   wasbuttonclicked = 1;
   getUserRepos(searchlocation);
@@ -91,11 +92,11 @@ var useStored = function (event) {
 // Saves searchlocations to local storage //
 function saveToLocalStorage(searchlocation) {
 
-  if (searchlocation !== ",") { // Check to see if user entered data //
-
+  if (searchlocation !==",") { // Check to see if user entered data //
+  
     for (i = 0; i < locationarray.length; i++) { // Check to see if data entry matches any savedlocations //
-      if (searchlocation === locationarray[i]) {
-        locationarray.splice(i, 1);
+      if (searchlocation === locationarray[i]){
+        locationarray.splice(i,1);
       };
     };
 
@@ -104,15 +105,15 @@ function saveToLocalStorage(searchlocation) {
   };
 };
 // end of saveToLocalStorage //
-
+ 
 // Loads cities from local storage //
 // This function significantly influenced by Mila Decker's code located at https://github.com/deckiedevs/weather-dashboard/blob/main/assets/js/script.js //
-var getLocations = function () {
+var getLocations = function() {
   locationarray = JSON.parse(localStorage.getItem("locations"));
 
   if (!locationarray) {
     locationarray = [];
-    return false;
+      return false;
   }
 
   searchheading1el.classList.remove("hide");
@@ -125,14 +126,14 @@ var getLocations = function () {
   savedlocations.appendChild(locationslistUl);
 
   for (var i = 0; i < locationarray.length; i++) {
-    var recentcitystate = document.createElement("button");
-    recentcitystate.setAttribute("type", "button");
-    recentcitystate.className = "list-group-item locbutton";
-    recentcitystate.setAttribute("value", locationarray[i]);
+      var recentcitystate = document.createElement("button");
+      recentcitystate.setAttribute("type", "button");
+      recentcitystate.className = "list-group-item locbutton";
+      recentcitystate.setAttribute("value", locationarray[i]);
 
-    var sep = locationarray[i].split(",");
-    recentcitystate.textContent = sep[0] + ", " + sep[1];
-    locationslistUl.prepend(recentcitystate);
+      var sep = locationarray[i].split(",");
+      recentcitystate.textContent = sep[0] + ", " + sep[1];
+      locationslistUl.prepend(recentcitystate);
   }
 
   var searchedcities = document.querySelector(".savedbutton");
@@ -152,35 +153,6 @@ var getUserRepos = function (searchlocation) {
           console.log(data);
           console.log(data.name);
 
-          var locationslistUl = document.querySelector("#savedsearchlist");
-          locationslistUl.className = "list-group savedbutton";
-
-          var recentcitystate = document.createElement("button");
-          recentcitystate.setAttribute("type", "button");
-          recentcitystate.className = "list-group-item locbutton";
-          recentcitystate.setAttribute("value", searchlocation);
-
-          var sep = searchlocation.split(",");
-          recentcitystate.textContent = sep[0] + ", " + sep[1];
-
-          // Check to see if local storage exists, if not add current search location to local storage //
-          if(localStorage.getItem("locations") === null) {
-            locationslistUl.prepend(recentcitystate);
-            var newlocation = [];
-            newlocation.push(searchlocation);
-            localStorage.setItem("locations", JSON.stringify(newlocation));
-          } else {
-            var locationsa = JSON.parse(localStorage.getItem("locations"))
-            if(locationsa.indexOf(searchlocation) === -1) {
-                locationslistUl.prepend(recentcitystate);
-                locationsa.push(searchlocation);
-                localStorage.setItem("locations", JSON.stringify(locationsa));
-              }
-          };
-
-          var recentlysearchedcity = document.querySelector(".savedbutton");
-          recentlysearchedcity.addEventListener('click', useStored);
-
           forecastcardEl.classList.remove("hide");
           fivedayforecastcardEl.classList.remove("hide");
 
@@ -188,14 +160,16 @@ var getUserRepos = function (searchlocation) {
           var icon = "https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
 
           // Add weather icon after city, state then add to card //
-          if (wasbuttonclicked == 1) {
+          if (wasbuttonclicked==1){
             var searchagain = "";
             var sep1 = searchlocation.split(",");
             searchagain = sep1[0] + ", " + sep1[1];
             citynameEl.innerHTML = searchagain + " <img src=\"" + icon + "\">";
-          } else {
-            citynameEl.innerHTML = usercityEl.value.toUpperCase() + ", " + userstateEl.value.toUpperCase() + " <img src=\"" + icon + "\">";
-            wasbuttonclicked == 0;
+
+          } else {      
+                    
+          citynameEl.innerHTML = usercityEl.value.toUpperCase() + ", " + userstateEl.value.toUpperCase() + " <img src=\"" + icon + "\">";
+          wasbuttonclicked==0;
           };
 
           // Add temperature, humidity, and windspeed to card //
@@ -208,7 +182,7 @@ var getUserRepos = function (searchlocation) {
           // Format date and time of data pull and add to card //
           var timestamp = moment.unix(data.dt);
           currentdateEl.innerHTML = "Last Updated:  " + timestamp.format("MMMM Do YYYY, h:mm:ss a");
-
+          
           // Fetch the apiUrlUV using coordinates from the apiUrl to get the UV and 5-day forcast data //
           var apiUrlUV = "https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&exclude=minutely,hourly&units=imperial&appid=a35a92d1b4df3733dc350ab5111e30d1"
           fetch(apiUrlUV)
@@ -219,51 +193,95 @@ var getUserRepos = function (searchlocation) {
 
                   var uvindexnumber = dataUV.current.uvi;
                   uvindexEl.innerHTML = uvindexnumber;
+                  
 
                   // Add and format UV data badge according to severity //
-                  switch (true) {
-                    case uvindexnumber >= 11:
-                      uvindexEl.className = "badge rounded-pill bg-extreme text-light";
-                      break;
-                    case uvindexnumber >= 8:
-                      uvindexEl.className = "badge rounded-pill bg-danger text-light";
-                      break;
-                    case uvindexnumber >= 6:
-                      uvindexEl.className = "badge rounded-pill bg-high text-light";
-                      break;
-                    case uvindexnumber >= 3:
-                      uvindexEl.className = "badge rounded-pill bg-moderate text-dark";
-                      break;
-                    default:
-                      uvindexEl.className = "badge rounded-pill bg-success text-light";
-                      break;
-                  }
+                    switch (true) {
 
-                  console.log(dataUV);
+                      case uvindexnumber >= 11:
+                        uvindexEl.className = "badge rounded-pill bg-extreme text-light";
+                      break;
 
-                  // Look up Url for appropriate weather icon.png //
-                  // Add weather icon after city, state then add to card //
-                  // Add temperature, humidity, and windspeed to card //
+                      case uvindexnumber >= 8:
+                        uvindexEl.className = "badge rounded-pill bg-danger text-light";
+                      break;
 
-                  var elementobj = {
-                    1: [weathericon1el, temperature1El, windspeed1El, humidity1el, currentdate1El],
-                    2: [weathericon2el, temperature2El, windspeed2El, humidity2el, currentdate2El],
-                    3: [weathericon3el, temperature3El, windspeed3El, humidity3el, currentdate3El],
-                    4: [weathericon4el, temperature4El, windspeed4El, humidity4el, currentdate4El],
-                    5: [weathericon5el, temperature5El, windspeed5El, humidity5el, currentdate5El]
-                  }
+                      case uvindexnumber >= 6:
+                        uvindexEl.className = "badge rounded-pill bg-high text-light";
+                      break;
 
-                  for(var i = 1; i < 6; i++) {
-                    var timestamp = moment.unix(dataUV.daily[i].dt);
-                    elementobj[i][4].innerHTML = timestamp.format("MMMM Do YYYY");
-                    var icon = "https://openweathermap.org/img/wn/" + dataUV.daily[i].weather[0].icon + "@2x.png";                    
-                    elementobj[i][0].innerHTML = "<img src=\"" + icon + "\">";
-                    elementobj[i][1].innerHTML = "Temp:  " + dataUV.daily[i].temp.day + " \u00B0F";
-                    elementobj[i][2].innerHTML = "Wind:  " + dataUV.daily[i].wind_speed + " MPH";
-                    elementobj[i][3].innerHTML = "Humidity:  " + dataUV.daily[i].humidity + "%";
-                  }
+                      case uvindexnumber >= 3:
+                        uvindexEl.className = "badge rounded-pill bg-moderate text-dark";
+                      break;
+
+                      default:
+                        uvindexEl.className = "badge rounded-pill bg-success text-light";
+                      break;
+                    }
+
+                    console.log(dataUV);
+
+                    var timestamp1 = moment.unix(dataUV.daily[1].dt);
+                    currentdate1El.innerHTML =  timestamp1.format("MMMM Do YYYY");
+                    var timestamp2 = moment.unix(dataUV.daily[2].dt);
+                    currentdate2El.innerHTML =  timestamp2.format("MMMM Do YYYY");
+                    var timestamp3 = moment.unix(dataUV.daily[3].dt);
+                    currentdate3El.innerHTML =  timestamp3.format("MMMM Do YYYY");
+                    var timestamp4 = moment.unix(dataUV.daily[4].dt);
+                    currentdate4El.innerHTML =  timestamp4.format("MMMM Do YYYY");
+                    var timestamp5 = moment.unix(dataUV.daily[5].dt);
+                    currentdate5El.innerHTML =  timestamp5.format("MMMM Do YYYY");
+
+                    // Look up Url for appropriate weather icon.png //
+                    var icon1 = "https://openweathermap.org/img/wn/" + dataUV.daily[1].weather[0].icon + "@2x.png";
+                    // Add weather icon after city, state then add to card //
+                    weathericon1el.innerHTML = "<img src=\"" + icon1 + "\">";
+
+                    // Add temperature, humidity, and windspeed to card //
+                    temperature1El.innerHTML = "Temp:  " + dataUV.daily[1].temp.day + " \u00B0F";
+                    windspeed1El.innerHTML = "Wind:  " + dataUV.daily[1].wind_speed + " MPH";
+                    humidity1el.innerHTML = "Humidity:  " + dataUV.daily[1].humidity + "%";
+
+
+                    var icon2 = "https://openweathermap.org/img/wn/" + dataUV.daily[2].weather[0].icon + "@2x.png";
+                    // Add weather icon after city, state then add to card //
+                    weathericon2el.innerHTML = "<img src=\"" + icon2 + "\">";
+
+                    // Add temperature, humidity, and windspeed to card //
+                    temperature2El.innerHTML = "Temp:  " + dataUV.daily[2].temp.day + " \u00B0F";
+                    windspeed2El.innerHTML = "Wind:  " + dataUV.daily[2].wind_speed + " MPH";
+                    humidity2el.innerHTML = "Humidity:  " + dataUV.daily[2].humidity + "%";
+
+                    var icon3 = "https://openweathermap.org/img/wn/" + dataUV.daily[3].weather[0].icon + "@2x.png";
+                    // Add weather icon after city, state then add to card //
+                    weathericon3el.innerHTML = "<img src=\"" + icon3 + "\">";
+
+                    // Add temperature, humidity, and windspeed to card //
+                    temperature3El.innerHTML = "Temp:  " + dataUV.daily[3].temp.day + " \u00B0F";
+                    windspeed3El.innerHTML = "Wind:  " + dataUV.daily[3].wind_speed + " MPH";
+                    humidity3el.innerHTML = "Humidity:  " + dataUV.daily[3].humidity + "%";
+
+                    var icon4 = "https://openweathermap.org/img/wn/" + dataUV.daily[4].weather[0].icon + "@2x.png";
+                    // Add weather icon after city, state then add to card //
+                    weathericon4el.innerHTML = "<img src=\"" + icon4 + "\">";
+
+                    // Add temperature, humidity, and windspeed to card //
+                    temperature4El.innerHTML = "Temp:  " + dataUV.daily[4].temp.day + " \u00B0F";
+                    windspeed4El.innerHTML = "Wind:  " + dataUV.daily[4].wind_speed + " MPH";
+                    humidity4el.innerHTML = "Humidity:  " + dataUV.daily[4].humidity + "%";
+
+                    var icon5 = "https://openweathermap.org/img/wn/" + dataUV.daily[5].weather[0].icon + "@2x.png";
+                    // Add weather icon after city, state then add to card //
+                    weathericon5el.innerHTML = "<img src=\"" + icon5 + "\">";
+
+                    // Add temperature, humidity, and windspeed to card //
+                    temperature5El.innerHTML = "Temp.:  " + dataUV.daily[5].temp.day + " \u00B0F";
+                    windspeed5El.innerHTML = "Wind:  " + dataUV.daily[5].wind_speed + " MPH";
+                    humidity5el.innerHTML = "Humidity:  " + dataUV.daily[5].humidity + "%";
+
+                    saveToLocalStorage(searchlocation);
                 });
-              }
+              } 
             });
         })
       } else {
@@ -277,7 +295,7 @@ function clearLocalStorage() {
   window.localStorage.clear();
   location.reload();
   clearButtonEl.classList.add("hide")
-};
+}
 
 
 // EXECUTION //
